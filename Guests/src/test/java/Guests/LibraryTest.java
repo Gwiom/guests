@@ -10,26 +10,21 @@ public class LibraryTest {
     
     @Test public void testAlphabetSoup() {
         Library classUnderTest = new Library();
-		String buf = "coderbyte";
-        assertTrue("someLibraryMethod should return 'true'", classUnderTest.AlphabetSoup(buf).equals( buf));
+		String buf = "coderbyte";        
+        assertTrue("someLibraryMethod should return 'true'", classUnderTest.AlphabetSoup2(buf).equals("bcdeeorty"));
 		buf = "love";
-        assertTrue("someLibraryMethod should return 'true'", classUnderTest.AlphabetSoup(buf).equals( buf));
+        assertTrue("someLibraryMethod should return 'true'", classUnderTest.AlphabetSoup2(buf).equals("elov"));
 		buf = "yoop";
-        assertTrue("someLibraryMethod should return 'true'", classUnderTest.AlphabetSoup(buf).equals( buf));
-		buf = "defbca";
-        assertTrue("someLibraryMethod should return 'true'", classUnderTest.AlphabetSoup(buf).equals( buf));
-    }
-    
+        assertTrue("someLibraryMethod should return 'true'", classUnderTest.AlphabetSoup2(buf).equals("oopy"));
+    }    
     @Test public void testAlphabetSoup2() {
         Library classUnderTest = new Library();
 		String buf = "coderbyte";        
-        assertTrue("someLibraryMethod should return 'true'", classUnderTest.AlphabetSoup2(buf).equals( buf));
+        assertTrue("someLibraryMethod should return 'true'", classUnderTest.AlphabetSoup2(buf).equals("bcdeeorty"));
 		buf = "love";
-        assertTrue("someLibraryMethod should return 'true'", classUnderTest.AlphabetSoup2(buf).equals( buf));
+        assertTrue("someLibraryMethod should return 'true'", classUnderTest.AlphabetSoup2(buf).equals("elov"));
 		buf = "yoop";
-        assertTrue("someLibraryMethod should return 'true'", classUnderTest.AlphabetSoup2(buf).equals( buf));
-		buf = "defbca";
-        assertTrue("someLibraryMethod should return 'true'", classUnderTest.AlphabetSoup2(buf).equals( buf));
+        assertTrue("someLibraryMethod should return 'true'", classUnderTest.AlphabetSoup2(buf).equals("oopy"));
     }
     
 }
