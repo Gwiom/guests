@@ -3,7 +3,247 @@
  */
 package Guests;
 
+import java.util.Arrays;
+
 public class Library {
+	
+	
+	
+	public static long[] factorialMemo = new long[19];
+
+	public static class BinaryTree {
+		private int data;
+		private int nbElements;
+		private BinaryTree left = null, right = null;
+		
+		
+		public String flatten(){
+			return flattenNode().trim();
+		}
+		
+		public BinaryTree(char data){
+			this.data = data;
+		}
+		
+		private String flattenNode(){
+			return  ((left != null)?left.flattenNode(): "") + (char)data + ((right != null)?right.flattenNode(): "");
+		}
+
+		public void addNode(char data){
+			nbElements++;
+			int addDepth = add(data, 0);
+		}
+		
+		public int add(char data, int parentDepth){
+			if(this.data > data){
+				if(left == null){left = new BinaryTree(data); }
+				else { return left.add(data, parentDepth+1); }
+			} else{
+				if(right == null) { right = new BinaryTree(data); }
+				else { return right.add(data, parentDepth+1); }
+			}
+			
+			return parentDepth;
+		}
+	}
+	
+	public static long firstFactorial(int num){
+		if((factorialMemo[num] != 0))
+			return factorialMemo[num];
+
+		else if(factorialMemo[0] == 0)
+			factorialMemo[0] = 1;
+
+		for(int i = 1; i<num; i++)
+			if(factorialMemo[i] == 0)
+				factorialMemo[i] = factorialMemo[i-1]*i;
+
+		return factorialMemo[num];
+	}
+
+	public static long firstFactorial2(long num){
+		int index = (int)num-1;
+		if((factorialMemo[index] == 0)){
+			if(num == 1) factorialMemo[index] = 1;
+			else factorialMemo[index] = num*firstFactorial(index);
+		}
+		return factorialMemo[index];
+	}
+
+	public static String FirstReverse(String str) {return new StringBuilder(str).reverse().toString();} 
+
+	public static String LetterChanges(String str){
+		char[] strArray = str.toCharArray();
+
+		for(int i = 0; i<strArray.length; i++){
+			char c = str.charAt(i);
+
+			if (Character.isLetter(c)){
+				char lowC = Character.toLowerCase(c);
+
+				if(lowC == 'z') strArray[i] = 'A';
+				else {
+					if(lowC == 'd' || lowC == 'h' || lowC == 'n' || lowC == 't') strArray[i] = (char)Character.toUpperCase(c+1);
+					else strArray[i] = (char)(c+1);
+				}	}	}
+
+		return new String(strArray);
+	}
+
+	public static String LetterChanges2(String str) {
+		if(str == null || str.length() == 0) return "";
+
+		String strOut = ((str.length()>1)?LetterChanges2(str.substring(1)):"");
+		char c = str.charAt(0);
+
+		if (Character.isLetter(c)){
+			char lowC = Character.toLowerCase(c);
+
+			if(lowC == 'z') return 'A'+strOut;
+			if(lowC == 'd' || lowC == 'h' || lowC == 'n' || lowC == 't') return (char)Character.toUpperCase(c+1)+strOut;
+			return (char)(c+1)+strOut;
+		}
+
+		return (char)c+strOut;
+	}
+
+	public static int SimpleAdding(int num) {
+		if(num>1) return (num + SimpleAdding(num-1));
+		return 1;
+	} 
+
+	public static String LetterCapitalize(String str) { 
+		String[] words = (str != null)?str.split("\\s+"): new String[]{};
+
+		if(words.length == 0)
+			return str;
+
+		String strOut = "";
+		for(int i = 0; i < words.length; i++)
+			strOut += " " + ((Character.isLetter(words[i].charAt(0)))?Character.toUpperCase(words[i].charAt(0))+ words[i].substring(1):words[i]);
+
+		return strOut.substring(1);
+	}
+
+	public static String LetterCapitalize2(String str){
+		if(str == null || str == "")
+			return "";
+
+		int firstWhitespaceIndex=  str.indexOf(" ");
+		if(firstWhitespaceIndex == -1)
+			return Character.isLetter(str.charAt(0))?Character.toUpperCase(str.charAt(0)) + str.substring(1):str;
+
+			if(firstWhitespaceIndex == 0)
+				return str.charAt(0) + LetterCapitalize2(str.substring(firstWhitespaceIndex+1));
+
+			return Character.toUpperCase(str.charAt(0)) + str.substring(1, firstWhitespaceIndex+1) + LetterCapitalize2(str.substring(firstWhitespaceIndex+1));
+	}
+
+	public static boolean SimpleSymbols(String str) { 
+		if(Character.isLetter(str.charAt(0)) || Character.isLetter(str.charAt(str.length()-1))) return false;
+		for(int i = 1; i < str.length()-1; i++)
+			if(Character.isLetter(str.charAt(i)) && (str.charAt(i-1) != '+' || str.charAt(i+1) != '+')) return false;
+		return true;
+	}
+
+	public static String CheckNums(int num1, int num2) {
+		return (num1 == num2)? "-1":(""+(num1 < num2));
+	}
+
+
+	public static String TimeConvert(int num) { return (num/60)+":"+(num%60); } 
+
+	//quick
+	public String AlphabetSoup(String str){
+		char[] strOut = str.toCharArray();
+		Arrays.sort(strOut);
+		return new String(strOut);
+	}
+	
+	//comb
+	public String AlphabetSoup2(String str){
+		char[] strOut = str.toCharArray();
+		int combSize = strOut.length*2/3;
+		while(combSize >= 1)
+		{
+			for(int i = 0; i <strOut.length-combSize; i++){
+				char c = strOut[i];
+				int combIndex = i+combSize;
+				if(c > strOut[combIndex]){
+					strOut[i] = strOut[combIndex];
+					strOut[combIndex] = c;
+			} }
+			combSize = combSize*2/3;
+		}
+		
+		return new String(strOut);
+	}
+	
+	//bubble
+	public static String AlphabetSoup3(String str){
+		char[] strOut = str.toCharArray();
+		boolean didASwap;
+		do {
+			didASwap = false;
+			for(int i = 0; i <strOut.length-1; i++){
+				char c = strOut[i];
+				int combIndex = i+1;
+				didASwap = didASwap || (c > strOut[combIndex]);
+				if(didASwap){
+					strOut[i] = strOut[combIndex];
+					strOut[combIndex] = c;
+		}	}	} while (didASwap);
+		
+		return new String(strOut);
+	}
+	
+	
+	//binary tree
+	public static String AlphabetSoup4(String str){
+		if (str == null || str == "") return "";
+		
+		BinaryTree tree = new BinaryTree(str.charAt(0));
+		
+		for (int i = 1; i < str.length(); i++)
+			tree.addNode(str.charAt(i));
+		
+		return tree.flatten();
+	}
+	
+	public static String LongestWord(String sen){
+		if (sen == null || sen == "") return "";
+		
+		int startLongestPos = 0, longestLen = 0;
+		int currentLen = 0;
+		
+		for (int i = 0; i < sen.length(); i++){
+			if(Character.isLetter(sen.charAt(i))){
+				currentLen ++;
+			}
+			else if (Character.isWhitespace(sen.charAt(i))){
+				if(currentLen > longestLen){
+					longestLen = currentLen;
+					startLongestPos = i-longestLen;
+				}
+				
+				currentLen = 0;
+			} 
+		}
+		if(currentLen > longestLen){
+			longestLen = currentLen;
+			startLongestPos = sen.length()-longestLen;
+		}
+		
+		return sen.substring(startLongestPos, startLongestPos+longestLen);
+	}  
+
+	public static String LongestWord2(String sen){
+		String[] words = sen.replaceAll("[^a-zA-Z\\s+]", "").split("\\s+");
+		int longestPos = 0;
+		for (int i = 0; i < words.length; i++) if(words[longestPos].length() < words[i].length()) longestPos = i;
+		return words[longestPos];
+	}
+	
     public boolean someLibraryMethod() {
         return true;
     }

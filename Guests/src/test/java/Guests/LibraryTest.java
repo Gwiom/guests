@@ -7,8 +7,29 @@ import org.junit.Test;
 import static org.junit.Assert.*;
 
 public class LibraryTest {
-    @Test public void testSomeLibraryMethod() {
+    
+    @Test public void testAlphabetSoup() {
         Library classUnderTest = new Library();
-        assertTrue("someLibraryMethod should return 'true'", classUnderTest.someLibraryMethod());
+		String buf = "coderbyte";
+        assertTrue("someLibraryMethod should return 'true'", classUnderTest.AlphabetSoup(buf).equals( buf));
+		buf = "love";
+        assertTrue("someLibraryMethod should return 'true'", classUnderTest.AlphabetSoup(buf).equals( buf));
+		buf = "yoop";
+        assertTrue("someLibraryMethod should return 'true'", classUnderTest.AlphabetSoup(buf).equals( buf));
+		buf = "defbca";
+        assertTrue("someLibraryMethod should return 'true'", classUnderTest.AlphabetSoup(buf).equals( buf));
     }
+    
+    @Test public void testAlphabetSoup2() {
+        Library classUnderTest = new Library();
+		String buf = "coderbyte";        
+        assertTrue("someLibraryMethod should return 'true'", classUnderTest.AlphabetSoup2(buf).equals( buf));
+		buf = "love";
+        assertTrue("someLibraryMethod should return 'true'", classUnderTest.AlphabetSoup2(buf).equals( buf));
+		buf = "yoop";
+        assertTrue("someLibraryMethod should return 'true'", classUnderTest.AlphabetSoup2(buf).equals( buf));
+		buf = "defbca";
+        assertTrue("someLibraryMethod should return 'true'", classUnderTest.AlphabetSoup2(buf).equals( buf));
+    }
+    
 }
