@@ -7,8 +7,6 @@ import java.util.Arrays;
 
 public class Library {
 	
-	
-	
 	public static long[] factorialMemo = new long[19];
 
 	public static class BinaryTree {
