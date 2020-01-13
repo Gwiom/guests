@@ -163,7 +163,7 @@ public class Library {
 		char[] strOut = str.toCharArray();
 		int combSize = strOut.length*2/3;
 		while(combSize >= 1)
-		{
+		{broooookenbuiiiiild
 			for(int i = 0; i <strOut.length-combSize; i++){
 				char c = strOut[i];
 				int combIndex = i+combSize;
